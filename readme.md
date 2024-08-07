@@ -8,7 +8,7 @@ Easy quick start template to use Pi-hole + Unbound on your local Docker install.
 2. Clone the directory and change into project directory
 
 ```sh
-$ git clone https://github.com/redoral/pihole-unbound-docker
+$ git clone https://github.com/redoral/pihole-unbound-docker.git
 $ cd pihole-unbound-docker
 ```
 
@@ -32,7 +32,7 @@ $ docker compose up -d
 ## ✅ Recommended Adlists
 
 - https://github.com/hagezi/dns-blocklists (I use MultiPRO)
-- https://oisd.nl/setup/pihole
+- https://oisd.nl/setup/pihole (I use big)
 
 ## 📕 Resources
 
