@@ -1,0 +1,6 @@
+etc-dnsmasq.d
+etc-pihole
+unbound/dev
+unbound/var
+unbound/unbound.pid
+.env

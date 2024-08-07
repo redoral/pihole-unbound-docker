@@ -1,0 +1,58 @@
+# More pi-hole info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+# More unbound-docker info at  https://github.com/MatthewVance/unbound-docker/tree/master
+
+networks:
+  dns_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/16
+  proxy:
+    external: true
+
+services:
+  pihole:
+    env_file: '.env'
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - '53:53/tcp'
+      - '53:53/udp'
+      - '80:80/tcp'
+    networks:
+      dns_net:
+        ipv4_address: 172.23.0.7
+    environment:
+      TZ: 'America/Los_Angeles'
+      WEBPASSWORD: ${WEB_PASSWORD}
+      PIHOLE_DNS_: '172.23.0.8#5353'
+    # Volumes store your data between container upgrades
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    restart: unless-stopped
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.pihole.entrypoints=http'
+      - 'traefik.http.routers.pihole.rule=Host(`pihole.yourdomain.com`)'
+      - 'traefik.http.middlewares.pihole-https-redirect.redirectscheme.scheme=https'
+      - 'traefik.http.routers.pihole.middlewares=pihole-https-redirect'
+      - 'traefik.http.routers.pihole-secure.entrypoints=https'
+      - 'traefik.http.routers.pihole-secure.rule=Host(`pihole.yourdomain.com`)'
+      - 'traefik.http.routers.pihole-secure.tls=true'
+      - 'traefik.http.routers.pihole-secure.service=pihole'
+      - 'traefik.http.services.pihole.loadbalancer.server.port=80'
+      - 'traefik.docker.network=proxy'
+  unbound:
+    container_name: unbound
+    image: 'mvance/unbound:latest'
+    networks:
+      dns_net:
+        ipv4_address: 172.23.0.8
+    ports:
+      - '5353:53/tcp'
+      - '5353:53/udp'
+    volumes:
+      - './unbound:/opt/unbound/etc/unbound'
+    restart: unless-stopped
