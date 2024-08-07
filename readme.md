@@ -1,4 +1,4 @@
-# Pihole + Unbound for Docker
+# Pi-hole + Unbound for Docker
 
 Easy quick start template to use Pi-hole + Unbound on your local Docker install. I did this to learn more about the two before setting them up on my own Ubuntu server.
 
@@ -26,6 +26,8 @@ $ docker compose up -d
 ```
 
 5. Verify you can access the pi-hole web GUI by navigating to `localhost/admin` in your browser.
+
+6. Update DNS servers on your devices to use Pi-hole
 
 ## ✅ Recommended Adlists
 
