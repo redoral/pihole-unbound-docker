@@ -5,14 +5,14 @@ Easy quick start template to use Pi-hole + Unbound on your local Docker install.
 ## 🚀 Quick Start
 
 1. Make sure you have Docker installed
-2. Clone the directory and change into project directory
+2. Clone the project and change into project directory
 
 ```sh
 $ git clone https://github.com/redoral/pihole-unbound-docker.git
 $ cd pihole-unbound-docker
 ```
 
-3. Create a `.env` file at the root of the project, then add your desired web password. This will be used to access the pi-hole web GUI.
+3. Create a `.env` file at the root of the project, then add your desired web password. This will be used to access the pi-hole web GUI
 
 ```js
 # .env
@@ -25,14 +25,14 @@ WEB_PASSWORD=REPLACE_WITH_DESIRED_PASSWORD
 $ docker compose up -d
 ```
 
-5. Verify you can access the pi-hole web GUI by navigating to `localhost/admin` in your browser.
+5. Verify you can access the pi-hole web GUI by navigating to `localhost/admin` in your browser
 
 6. Update DNS servers on your devices to use Pi-hole
 
 ## ✅ Recommended Adlists
 
-- https://github.com/hagezi/dns-blocklists (I use MultiPRO)
-- https://oisd.nl/setup/pihole (I use big)
+- https://github.com/hagezi/dns-blocklists
+- https://oisd.nl/setup/pihole
 
 ## 📕 Resources
 
