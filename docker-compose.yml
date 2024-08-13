@@ -5,7 +5,6 @@ networks:
   dns_net:
     driver: bridge
     ipam:
-      driver: default
       config:
         - subnet: 172.23.0.0/16
   proxy:
